@@ -1,0 +1,42 @@
+[
+    {  
+        "id": "user1-1742977812360",
+        "value":4,
+        "note": "sample note",
+        "creationDate": 1742977812360,
+        "location": {
+            "lat":44.402217806704414,
+            "lng": 8.943108718728812 
+        }
+    },
+    {  
+        "id": "user1-1742978111083",
+        "value":3,
+        "note": "not happy about it",
+        "creationDate": "1742978111083",
+        "location": {
+            "lat":44.402217806704414,
+            "lng": 8.943108718728812 
+        }
+    },
+    {  
+        "id": "user1-1742978126139",
+        "value":2,
+        "note": "I am ok ",
+        "creationDate": 1742978126139,
+        "location": {
+            "lat":44.402217806704414,
+            "lng": 8.943108718728812 
+        }
+    },
+    {  
+        "id": "user1-1742978141616",
+        "value":1,
+        "note": "Because I am happy ",
+        "creationDate": 1742978141616,
+        "location": {
+            "lat":44.402217806704414,
+            "lng": 8.943108718728812 
+        }
+    }
+]
