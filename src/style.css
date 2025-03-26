@@ -1,3 +1,14 @@
 main {
     min-height: 60vh;
 }
+
+.add-motus {
+    position: fixed;
+    bottom: 0;
+}
+
+.add-bnt {
+    background-color: transparent;
+    border: none;
+}
+

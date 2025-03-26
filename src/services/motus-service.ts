@@ -29,9 +29,10 @@ class EMotusService {
   }
 
   addMotus(motus: Motus) {
-    this.moti.push(motus)
-    this.saveMoti()
-    return this.moti
+    console.log(motus)
+    // this.moti.push(motus)
+    // this.saveMoti()
+    // return this.moti
   }
 
   editMotus() {}

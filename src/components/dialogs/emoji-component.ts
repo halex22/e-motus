@@ -10,15 +10,15 @@ export default class EmojiContainer extends HTMLElement {
   connectedCallback() {
     this.styleComponent()
     this.render()
-    console.log(this.isSelected)
   }
 
   styleComponent() {
     const style = document.createElement('style')
     style.innerHTML = `
       span {
-      padding: 1rem;
-      ${this.isSelected && 'background-color: green;'}
+      padding: 0 1rem;
+      font-size: 20px;
+      ${this.isSelected && 'background-color: rgb(145, 250, 145);'}
       }
     `
     this.shadowRoot!.appendChild(style)
@@ -29,8 +29,8 @@ export default class EmojiContainer extends HTMLElement {
     const emoji = document.createTextNode(this.emoji)
     span.appendChild(emoji)
     this.shadowRoot!.appendChild(span)
+    
     this.addEventListener('click', () => {
-      console.log('you clicked', this.emoji)
       this.dispatchEmoji()
     })
   }
