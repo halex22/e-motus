@@ -1,18 +1,18 @@
-import { type Motus } from "../models/motus"
 import eMotusService from "../services/motus-service"
 import MotusCard from "./motus-card"
 
 export default class MotiList extends HTMLElement {
-  moti!: Motus[] 
   service = eMotusService
 
   constructor() {
     super()
     this.attachShadow({mode: 'open'})
+    document.addEventListener('success-save', () => {
+      this.render()
+    })
   }
 
   connectedCallback() {
-    this.moti = this.service.moti
     this.styleComponent()
     this.render()
   }
@@ -30,9 +30,11 @@ export default class MotiList extends HTMLElement {
       this.shadowRoot!.appendChild(container)
     }
 
-    this.moti.forEach(motus => {
+    this.service.moti.forEach(motus => {
+      console.log(motus)
       const card: MotusCard = document.createElement('motus-card') as MotusCard
       card.motus = motus
+      console.log(card)
       container.appendChild(card)
     })
   }

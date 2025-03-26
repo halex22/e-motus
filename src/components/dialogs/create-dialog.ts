@@ -34,7 +34,7 @@ export default class CreateDialog extends HTMLElement {
 
   handleEmojiEvent (event: CustomEvent<string>)  {
     this.userSelectEmoji = event.detail
-    this.renderEmojis()
+    this.renderEmojisArray()
   }
 
   render():void {
@@ -52,7 +52,7 @@ export default class CreateDialog extends HTMLElement {
     const motiContainer = document.createElement('div')
     motiContainer.id = 'moti-container'
     this.form.appendChild(motiContainer)
-    this.renderEmojis()
+    this.renderEmojisArray()
 
     this.form.appendChild(this.createTextArea())
     this.form.appendChild(this.createBtns())
@@ -85,7 +85,7 @@ export default class CreateDialog extends HTMLElement {
     return div
   }
 
-  renderEmojis() {
+  renderEmojisArray() {
     const container = this.shadowRoot?.getElementById('moti-container')!
     container.innerHTML = ''
     Object.entries(emojis).forEach( emoji => {
@@ -105,6 +105,9 @@ export default class CreateDialog extends HTMLElement {
         return 
       }
       this.service.addMotus(this.createMotus())
+      const successEvent = new Event('success-save')
+      document.dispatchEvent(successEvent)
+      this.remove()
     })
   }
 

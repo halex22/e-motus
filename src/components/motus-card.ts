@@ -14,15 +14,16 @@ export default class MotusCard extends HTMLElement {
     this.render()
   }
 
-
   render() {
+    console.log(this.motus, 'motus when rendering')
     const cardDiv = document.createElement('div')
     cardDiv.classList.add('motus-container')
+    console.log(this.motus)
 
     const emoticonContainer = document.createElement('div')
     emoticonContainer.classList.add('emoji-container')
     const emojiSpan = document.createElement('span')
-    const emId: string = String(this.motus.value)
+    const emId: string = String(this.motus?.value) ?? '0'
     emojiSpan.innerText = Object(emotions)[emId]
     emoticonContainer.appendChild(emojiSpan)
     const infoContainer = document.createElement('div')
@@ -33,11 +34,11 @@ export default class MotusCard extends HTMLElement {
 
     const dateSpan = document.createElement('span')
     // dateSpan.innerText = String(Date.parse(this.motus.creationDate))
-    dateSpan.innerText = new Date(this.motus.creationDate).toLocaleTimeString()
+    dateSpan.innerText = new Date(this.motus?.creationDate).toLocaleTimeString()
     infoContainer.appendChild(dateSpan)
 
     const noteP = document.createElement('p')
-    noteP.innerText = this.motus.note
+    noteP.innerText = this.motus?.note
     infoContainer.appendChild(noteP)
 
     this.shadowRoot!.appendChild(cardDiv)

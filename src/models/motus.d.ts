@@ -9,5 +9,4 @@ export interface Motus {
   value: number
   note: string ! 
   creationDate: number
-  location?: Location
 }

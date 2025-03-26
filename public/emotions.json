@@ -13,7 +13,7 @@
         "id": "user1-1742978111083",
         "value":3,
         "note": "not happy about it",
-        "creationDate": "1742978111083",
+        "creationDate": 1742978111083,
         "location": {
             "lat":44.402217806704414,
             "lng": 8.943108718728812 
