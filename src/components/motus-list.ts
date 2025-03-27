@@ -30,18 +30,18 @@ export default class MotiList extends HTMLElement {
       this.shadowRoot!.appendChild(container)
     }
 
-    this.service.moti.forEach((motus, index) => {
-      console.warn('\nlogging emotion ', index)
-      console.log('motus before going to card')
-      console.log(motus)
+    this.service.moti.forEach((motus) => {
+      // console.warn('\nlogging emotion ', index)
+      // console.log('motus before going to card')
+      // console.log(motus)
       const card: MotusCard = document.createElement('motus-card') as MotusCard
-      console.log('timestamp of card creation', JSON.stringify(card))
+      // console.log('timestamp of card creation', JSON.stringify(card))
       card.motus = motus
       // card.setAttribute('selected-motus',JSON.stringify(motus))
-      console.log('card after been created:')
-      console.log(card)
+      // console.log('card after been created:')
+      // console.log(card)
       container.appendChild(card)
-      console.log('log after appending child')
+      // console.log('log after appending child')
     })
   }
 

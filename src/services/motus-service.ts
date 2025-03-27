@@ -10,8 +10,7 @@ export default class EMotusService {
   async loadMoti(){
     const localMotiString = localStorage.getItem(this.storageKey)
     if (localMotiString){
-      console.info(JSON.parse(localMotiString))
-      console.warn('loading from storage')
+      console.info('loading from storage')
       this.moti = JSON.parse(localMotiString)
     } else {
       

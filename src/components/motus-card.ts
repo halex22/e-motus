@@ -1,6 +1,6 @@
 import { Motus } from "../models/motus"
 import emotions from "../../public/emojis.json"
-
+import ConfirmDialog from "./dialogs/confirm-dialog"
 
 export default class MotusCard extends HTMLElement {
   motus!: Motus
@@ -15,12 +15,12 @@ export default class MotusCard extends HTMLElement {
     this.render()
   }
 
-  // get motus() {
-  //   return JSON.parse(this.getAttribute('selected-motus')!)
-  // }
+  get StringDateFormat() {
+    return new Date(this.motus.creationDate).toLocaleTimeString()
+  }
 
   render() {
-    console.warn("motus when rendering",this.motus)
+    // console.warn("motus when rendering",this.motus)
     const cardDiv = document.createElement('div')
     cardDiv.classList.add('motus-container')
 
@@ -37,13 +37,13 @@ export default class MotusCard extends HTMLElement {
     cardDiv.appendChild(infoContainer)
 
     const dateSpan = document.createElement('span')
-    // dateSpan.innerText = String(Date.parse(this.motus.creationDate))
-    dateSpan.innerText = new Date(this.motus.creationDate).toLocaleTimeString()
+    dateSpan.innerText = this.StringDateFormat
     infoContainer.appendChild(dateSpan)
 
     const noteP = document.createElement('p')
     noteP.innerText = this.motus?.note
     infoContainer.appendChild(noteP)
+    cardDiv.appendChild(this.createDeleteBtn())
 
     this.shadowRoot!.appendChild(cardDiv)
     
@@ -55,6 +55,8 @@ export default class MotusCard extends HTMLElement {
       :host {
         box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
         font-size: 20px;
+        position: relative;
+        padding: 1rem;
       }
       .motus-container {
         display: grid;
@@ -67,14 +69,47 @@ export default class MotusCard extends HTMLElement {
         justify-content: center;
         align-items: center;
       }
+
+      .btns-container {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin: 0 1rem 1rem 0;
+        display: flex;
+      }
+      .rm-btn {
+        background-color: inherit;
+        border: 0;
+        font-size: 1rem;
+      }
+
+      .rm-btn:hover {
+        font-size: 1.25rem
+      }
         
     `
     this.shadowRoot?.appendChild(style)
   }
 
   createDeleteBtn() {
+    const div = document.createElement('div')
+    div.classList.add('btns-container')
     const btn = document.createElement('button')
-    btn.innerText = 'delete'
+    btn.classList.add('rm-btn')
+    div.appendChild(btn)
+    btn.innerText = '🗑️'
+
+    const editBtn = document.createElement('div')
+    editBtn.innerText =  "✏️"
+    div.appendChild(editBtn)
+
+    // btn.addEventListener('click', () => {
+    //   const confirmDialog = document.createElement('confirm-dialog')  as ConfirmDialog
+    //   confirmDialog.message = 'delete'
+    //   this.shadowRoot?.appendChild(confirmDialog)
+    // })
+
+    return div
   }
 }
 
