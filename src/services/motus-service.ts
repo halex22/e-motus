@@ -33,7 +33,6 @@ export default class EMotusService {
   }
 
   addMotus(motus: Motus) {
-    console.log(motus)
     this._moti.push(motus)
     this.saveMoti()
   }

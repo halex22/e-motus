@@ -1,10 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.filter-options  {
+    display: flex;
+}
+
+.option {
+    border-radius: 4px;
+    background-color: gray;
+    color: white;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.25rem;
+}
+
+
+
+
+
 main {
     min-height: 60vh;
 }
 
+
+
 .add-motus {
     position: fixed;
     bottom: 0;
+    z-index: 1;
 }
 
 .add-bnt {
