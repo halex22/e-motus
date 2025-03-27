@@ -3,7 +3,7 @@ import emotions from "../../public/emojis.json"
 
 
 export default class MotusCard extends HTMLElement {
-  motus!: Motus
+  // motus!: Motus
   constructor() {
     super()
     this.attachShadow({mode:'open'})
@@ -14,16 +14,19 @@ export default class MotusCard extends HTMLElement {
     this.render()
   }
 
+  get motus() {
+    return JSON.parse(this.getAttribute('selected-motus')!)
+  }
+
   render() {
-    console.log(this.motus, 'motus when rendering')
+
     const cardDiv = document.createElement('div')
     cardDiv.classList.add('motus-container')
-    console.log(this.motus)
 
     const emoticonContainer = document.createElement('div')
     emoticonContainer.classList.add('emoji-container')
     const emojiSpan = document.createElement('span')
-    const emId: string = String(this.motus?.value) ?? '0'
+    const emId: string = String(this.motus.value) ?? '0'
     emojiSpan.innerText = Object(emotions)[emId]
     emoticonContainer.appendChild(emojiSpan)
     const infoContainer = document.createElement('div')
@@ -34,7 +37,7 @@ export default class MotusCard extends HTMLElement {
 
     const dateSpan = document.createElement('span')
     // dateSpan.innerText = String(Date.parse(this.motus.creationDate))
-    dateSpan.innerText = new Date(this.motus?.creationDate).toLocaleTimeString()
+    dateSpan.innerText = new Date(this.motus.creationDate).toLocaleTimeString()
     infoContainer.appendChild(dateSpan)
 
     const noteP = document.createElement('p')

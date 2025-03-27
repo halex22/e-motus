@@ -31,9 +31,12 @@ export default class MotiList extends HTMLElement {
     }
 
     this.service.moti.forEach(motus => {
+      console.log('motus before going to card')
       console.log(motus)
       const card: MotusCard = document.createElement('motus-card') as MotusCard
-      card.motus = motus
+      // card.motus = motus
+      card.setAttribute('selected-motus',JSON.stringify(motus))
+      console.log('card after been render:')
       console.log(card)
       container.appendChild(card)
     })

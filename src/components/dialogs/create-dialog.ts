@@ -69,6 +69,7 @@ export default class CreateDialog extends HTMLElement {
     })
 
     const okBtn = document.createElement('button')
+    // okBtn.type = 'button'
     okBtn.innerText = 'ok'
 
     div.append(cancelBtn, okBtn)
