@@ -3,23 +3,24 @@ import emotions from "../../public/emojis.json"
 
 
 export default class MotusCard extends HTMLElement {
-  // motus!: Motus
+  motus!: Motus
   constructor() {
     super()
     this.attachShadow({mode:'open'})
   }
 
   connectedCallback() {
+    console.assert(!!this.motus, 'motus is invalid')
     this.styleComponent()
     this.render()
   }
 
-  get motus() {
-    return JSON.parse(this.getAttribute('selected-motus')!)
-  }
+  // get motus() {
+  //   return JSON.parse(this.getAttribute('selected-motus')!)
+  // }
 
   render() {
-
+    console.warn("motus when rendering",this.motus)
     const cardDiv = document.createElement('div')
     cardDiv.classList.add('motus-container')
 
