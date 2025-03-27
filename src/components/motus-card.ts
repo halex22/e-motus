@@ -1,6 +1,5 @@
-import { Motus } from "../models/motus"
+import Motus from "../models/motus"
 import emotions from "../../public/emojis.json"
-import ConfirmDialog from "./dialogs/confirm-dialog"
 
 export default class MotusCard extends HTMLElement {
   motus!: Motus
@@ -15,9 +14,6 @@ export default class MotusCard extends HTMLElement {
     this.render()
   }
 
-  get StringDateFormat() {
-    return new Date(this.motus.creationDate).toLocaleTimeString()
-  }
 
   render() {
     // console.warn("motus when rendering",this.motus)
@@ -37,7 +33,7 @@ export default class MotusCard extends HTMLElement {
     cardDiv.appendChild(infoContainer)
 
     const dateSpan = document.createElement('span')
-    dateSpan.innerText = this.StringDateFormat
+    dateSpan.innerText = this.motus.StringDate
     infoContainer.appendChild(dateSpan)
 
     const noteP = document.createElement('p')

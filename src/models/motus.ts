@@ -8,13 +8,11 @@ interface Location {
 
 
 export default class Motus {
-  id!: string
-  note!: string
-  value!: number
-  creationDate?: number
+
+  // creationDate?: number
   location?: Location
 
-  constructor() {
+  constructor(public id: string, public note: string, public value: number, public creationDate?: number) {
     if(!this.creationDate) this.creationDate = Date.now()
   }
 

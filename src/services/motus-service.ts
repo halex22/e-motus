@@ -1,8 +1,8 @@
-import { type Motus } from "../models/motus"
+import Motus from "../models/motus"
 
 export default class EMotusService {
   private storageKey = 'motiStorage'
-  moti: Motus[] = []
+  _moti: Motus[] = []
 
   constructor() {
   }
@@ -11,12 +11,16 @@ export default class EMotusService {
     const localMotiString = localStorage.getItem(this.storageKey)
     if (localMotiString){
       console.info('loading from storage')
-      this.moti = JSON.parse(localMotiString)
+      this._moti = JSON.parse(localMotiString)
     } else {
       
-      this.moti = await this.getMotiFromJson()
+      this._moti = await this.getMotiFromJson()
       this.saveMoti() 
     }
+  }
+
+  get moti() {
+    return this._moti.map(motus => new Motus(motus.id, motus.note, motus.value , motus.creationDate))
   }
 
   getMotiFromJson(){
@@ -25,14 +29,14 @@ export default class EMotusService {
   }
 
   saveMoti(){
-    localStorage.setItem(this.storageKey, JSON.stringify(this.moti))
+    localStorage.setItem(this.storageKey, JSON.stringify(this._moti))
   }
 
   addMotus(motus: Motus) {
-    this.moti.push(motus)
+    console.log(motus)
+    this._moti.push(motus)
     this.saveMoti()
   }
-
   editMotus() {}
 }
 

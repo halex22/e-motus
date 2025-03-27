@@ -1,7 +1,7 @@
 import emojis from '../../../public/emojis.json'
 import EmojiContainer from './emoji-component'
-import { type Motus } from '../../models/motus'
 import EMotusService from '../../services/motus-service'
+import Motus from '../../models/motus'
 
 
 export default class CreateDialog extends HTMLElement {
@@ -118,12 +118,11 @@ export default class CreateDialog extends HTMLElement {
 
     const timeStamp = Date.now()
     const note = String( data.get('description'))
-    const newMotus: Motus = {
-      id: `user1-${timeStamp}`,
-      value: parseInt(this.userSelectEmoji!),
-      creationDate: timeStamp,
-      note: note ? note : 'no description given'
-    }
+    const newMotus = new Motus(
+      `user1-${timeStamp}`,
+      note ? note : 'no description given',
+      parseInt(this.userSelectEmoji!)
+    )
     return newMotus
   }
 
