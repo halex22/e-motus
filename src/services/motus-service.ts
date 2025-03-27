@@ -1,13 +1,10 @@
 import { type Motus } from "../models/motus"
 
-class EMotusService {
-  static instance: EMotusService
+export default class EMotusService {
   private storageKey = 'motiStorage'
   moti: Motus[] = []
+
   constructor() {
-    if (EMotusService.instance) return EMotusService.instance
-    EMotusService.instance = this
-    this.loadMoti()
   }
 
   async loadMoti(){
@@ -16,7 +13,8 @@ class EMotusService {
       console.info('loading from storage')
       this.moti = JSON.parse(localMotiString)
     } else {
-      this.moti = await this.getMotiFromJson() 
+      this.moti = await this.getMotiFromJson()
+      this.saveMoti() 
     }
   }
 
@@ -30,15 +28,10 @@ class EMotusService {
   }
 
   addMotus(motus: Motus) {
-    console.log(motus)
     this.moti.push(motus)
     this.saveMoti()
-    
   }
 
   editMotus() {}
 }
 
-const eMotusService = new EMotusService()
-await eMotusService.loadMoti()
-export default eMotusService

@@ -1,19 +1,19 @@
 import emojis from '../../../public/emojis.json'
 import EmojiContainer from './emoji-component'
 import { type Motus } from '../../models/motus'
-import eMotusService from '../../services/motus-service'
+import EMotusService from '../../services/motus-service'
 
 
 export default class CreateDialog extends HTMLElement {
   private userSelectEmoji: string | null  = null
   private form: HTMLFormElement = document.createElement('form')
-  private service = eMotusService
+  private service = new EMotusService()
+
   constructor() {
     super()
     this.attachShadow({mode: 'open'})
   }
  
-
   connectedCallback() {
     this.myStyle()
     this.render()
@@ -99,12 +99,13 @@ export default class CreateDialog extends HTMLElement {
   }
 
   addListenerToForm() {
-    this.form.addEventListener('submit', (event) => {
+    this.form.addEventListener('submit', async (event) => {
       event.preventDefault()
       if (!this.userSelectEmoji) {
         alert('please select an emotion')
         return 
       }
+      await this.service.loadMoti()
       this.service.addMotus(this.createMotus())
       const successEvent = new Event('success-save')
       document.dispatchEvent(successEvent)

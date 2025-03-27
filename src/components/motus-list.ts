@@ -1,8 +1,8 @@
-import eMotusService from "../services/motus-service"
 import MotusCard from "./motus-card"
+import EMotusService from "../services/motus-service"
 
 export default class MotiList extends HTMLElement {
-  service = eMotusService
+  service = new EMotusService()
 
   constructor() {
     super()
@@ -17,8 +17,8 @@ export default class MotiList extends HTMLElement {
     this.render()
   }
 
-  render() {
-
+  async render() {
+    await this.service.loadMoti()
     let container = this.shadowRoot!.getElementById('container')
 
     if (container) {
