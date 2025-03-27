@@ -1,5 +1,6 @@
 import Motus from "../models/motus"
 import emotions from "../../public/emojis.json"
+import EditDialog from "./dialogs/edit-dialog"
 
 export default class MotusCard extends HTMLElement {
   motus!: Motus
@@ -97,6 +98,10 @@ export default class MotusCard extends HTMLElement {
 
     const editBtn = document.createElement('div')
     editBtn.innerText =  "✏️"
+    editBtn.addEventListener('click', (event) => {
+      const dialog = document.createElement('edit-dialog') as EditDialog
+      this.shadowRoot?.appendChild(dialog) 
+    })
     div.appendChild(editBtn)
 
     // btn.addEventListener('click', () => {
