@@ -1,5 +1,3 @@
-import emojis from '../../../public/emojis.json'
-import EmojiContainer from './emoji-component'
 import BaseDialog from './base-dialog'
 import Motus from '../../models/motus'
 
@@ -12,18 +10,6 @@ export default class EditDialog extends BaseDialog {
  
   makeDocumentListenEvent(): void {
     document.addEventListener('confirm-status', (event) => this.handleEmojiEvent(event as CustomEvent<string>))
-  }
-
-  renderEmojisArray() {
-    const container = this.shadowRoot?.getElementById('moti-container')!
-    container.innerHTML = ''
-    Object.entries(emojis).forEach( emoji => {
-      const emojiContainer = document.createElement('emoji-container') as EmojiContainer
-      emojiContainer.emoji = emoji[1]
-      emojiContainer.emojiValue = emoji[0]
-      emojiContainer.isSelected = !!this.userSelectEmoji && this.userSelectEmoji === emoji[0]  
-      container.appendChild(emojiContainer)
-    })
   }
 
   addListenerToForm(): void {
@@ -47,6 +33,22 @@ export default class EditDialog extends BaseDialog {
   //     this.remove()
   //   })
   // }
+
+  handleMotusInstanceCreation(): Motus {
+    const data = new FormData(this.form)
+
+    const timeStamp = Date.now()
+    const note = String( data.get('description'))
+    const newMotus = new Motus(
+          this.motus!.id,
+          note ? note : this.motus!.note,
+          parseInt(this.userSelectEmoji!),
+          timeStamp
+        )
+    return newMotus
+  
+  }
+  
 
   createMotus() {
     const data = new FormData(this.form)

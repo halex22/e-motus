@@ -17,10 +17,11 @@ export default abstract class BaseDialog extends HTMLElement {
   }
  
   connectedCallback() {
+    this.userSelectEmoji = String(this.motus!.value)
     this.myStyle()
     this.render()
     this.makeDocumentListenEvent()
-    // document.addEventListener('emoji-value', (event) => this.handleEmojiEvent(event as CustomEvent<string>))
+    document.addEventListener('emoji-value', (event) => this.handleEmojiEvent(event as CustomEvent<string>))
   }
 
   abstract makeDocumentListenEvent(): void;
@@ -32,6 +33,11 @@ export default abstract class BaseDialog extends HTMLElement {
     box-shadow: 0px 10px 15px 15px rgba(0,0,0,0.1);
     border: 1px solid rgb(198, 198, 198);
     border-radius: 8px;
+    padding: 20px;
+    }
+    dialog::backdrop {
+      background-color: rgba(122, 122, 122, 0.8);
+      backdrop-filter: blur(3px);
     }
     `
     this.shadowRoot!.appendChild(style)
@@ -72,7 +78,6 @@ export default abstract class BaseDialog extends HTMLElement {
     })
 
     const okBtn = document.createElement('button')
-    // okBtn.type = 'button'
     okBtn.innerText = 'ok'
 
     div.append(cancelBtn, okBtn)
@@ -84,7 +89,7 @@ export default abstract class BaseDialog extends HTMLElement {
     const div = document.createElement('div')
     div.innerHTML = `
       <label style="display: block;" for="description">Add a description</label>
-      <textarea name="description" id="description"></textarea>  
+      <textarea name="description" id="description">${this.motus?.note}</textarea>  
     `
     return div
   }
@@ -96,10 +101,16 @@ export default abstract class BaseDialog extends HTMLElement {
       const emojiContainer = document.createElement('emoji-container') as EmojiContainer
       emojiContainer.emoji = emoji[1]
       emojiContainer.emojiValue = emoji[0]
-      emojiContainer.isSelected = !!this.userSelectEmoji && this.userSelectEmoji === emoji[0]  
+      emojiContainer.isSelected = this.isEmojiSelected(emoji[0]) 
       container.appendChild(emojiContainer)
     })
   }
+
+  isEmojiSelected(emoji: string) {
+    return  !!this.userSelectEmoji && this.userSelectEmoji === emoji
+  }
+
+
 
   abstract addListenerToForm(): void; 
 
@@ -118,6 +129,8 @@ export default abstract class BaseDialog extends HTMLElement {
   //   })
   // }
 
+  abstract handleMotusInstanceCreation(): Motus 
+
   createMotus() {
     const data = new FormData(this.form)
 
@@ -132,8 +145,8 @@ export default abstract class BaseDialog extends HTMLElement {
   }
 
   initDialog() {
-    this.dialog.open = true
     this.shadowRoot!.appendChild(this.dialog)
+    this.dialog.showModal()
   }
 
 }

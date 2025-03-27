@@ -1,6 +1,6 @@
-import Motus from "../models/motus"
-import emotions from "../../public/emojis.json"
-import EditDialog from "./dialogs/edit-dialog"
+import Motus from "../../models/motus"
+import emotions from "../../../public/emojis.json"
+import EditDialog from "../dialogs/edit-dialog"
 
 export default class MotusCard extends HTMLElement {
   motus!: Motus
@@ -10,7 +10,7 @@ export default class MotusCard extends HTMLElement {
   }
 
   connectedCallback() {
-    console.assert(!!this.motus, 'motus is invalid')
+    // console.assert(!!this.motus, 'motus is invalid')
     this.styleComponent()
     this.render()
   }
@@ -24,7 +24,7 @@ export default class MotusCard extends HTMLElement {
     const emoticonContainer = document.createElement('div')
     emoticonContainer.classList.add('emoji-container')
     const emojiSpan = document.createElement('span')
-    const emId: string = String(this.motus.value) ?? '0'
+    const emId: string = String(this.motus.value) 
     emojiSpan.innerText = Object(emotions)[emId]
     emoticonContainer.appendChild(emojiSpan)
     const infoContainer = document.createElement('div')
@@ -100,6 +100,7 @@ export default class MotusCard extends HTMLElement {
     editBtn.innerText =  "✏️"
     editBtn.addEventListener('click', (event) => {
       const dialog = document.createElement('edit-dialog') as EditDialog
+      dialog.motus = this.motus
       this.shadowRoot?.appendChild(dialog) 
     })
     div.appendChild(editBtn)

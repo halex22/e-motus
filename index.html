@@ -18,6 +18,7 @@
       </div>
     </header>
     <main id="motus-id-container">
+      <div id="dialog-container"></div>
       <!-- when rendering directly moti here when loading from local storage moti are undefined -->
       <!-- <moti-list></moti-list> --> 
       <!-- <create-dialog></create-dialog> -->
@@ -27,11 +28,11 @@
         </button>
       </div>
     </main>
-    <script type="module" src="/src/components//dialogs/create-dialog.ts"></script>
+    <script type="module" src="/src/components/dialogs/create-dialog.ts"></script>
     <script type="module" src="/src/components/dialogs/confirm-dialog.ts"></script>
     <script type="module" src="/src/components/dialogs/emoji-component.ts"></script>
-    <script type="module" src="/src/components/motus-list.ts"></script>
-    <script type="module" src="/src/components/motus-card.ts"></script>
+    <script type="module" src="/src/components/motus/motus-list.ts"></script>
+    <script type="module" src="/src/components/motus/motus-card.ts"></script>
     <script type="module" src="/src/components/dialogs/edit-dialog.ts"></script>
     <script type="module" src="/src/main.ts"></script>
   </body>

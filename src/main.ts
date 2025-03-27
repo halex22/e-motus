@@ -1,7 +1,7 @@
 import './style.css'
 
 document.querySelector<HTMLButtonElement>('#add-bnt')!.addEventListener('click', () => {
-  document.querySelector('main')!.appendChild(document.createElement('create-dialog'))
+  document.querySelector('#dialog-container')!.appendChild(document.createElement('create-dialog'))
 })
 
 const motiList = document.createElement('moti-list')

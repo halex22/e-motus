@@ -1,5 +1,5 @@
 import MotusCard from "./motus-card"
-import EMotusService from "../services/motus-service"
+import EMotusService from "../../services/motus-service"
 
 export default class MotiList extends HTMLElement {
   service = new EMotusService()
@@ -31,17 +31,9 @@ export default class MotiList extends HTMLElement {
     }
 
     this.service.moti.forEach((motus) => {
-      // console.warn('\nlogging emotion ', index)
-      // console.log('motus before going to card')
-      // console.log(motus)
       const card: MotusCard = document.createElement('motus-card') as MotusCard
-      // console.log('timestamp of card creation', JSON.stringify(card))
       card.motus = motus
-      // card.setAttribute('selected-motus',JSON.stringify(motus))
-      // console.log('card after been created:')
-      // console.log(card)
       container.appendChild(card)
-      // console.log('log after appending child')
     })
   }
 

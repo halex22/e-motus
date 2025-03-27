@@ -27,6 +27,11 @@ export default class CreateDialog extends HTMLElement {
     box-shadow: 0px 10px 15px 15px rgba(0,0,0,0.1);
     border: 1px solid rgb(198, 198, 198);
     border-radius: 8px;
+    padding: 20px;
+    }
+    dialog::backdrop {
+      background-color: rgba(122, 122, 122, 0.8);
+      backdrop-filter: blur(3px);
     }
     `
     this.shadowRoot!.appendChild(style)
@@ -39,8 +44,9 @@ export default class CreateDialog extends HTMLElement {
 
   render():void {
     const dialog: HTMLDialogElement = document.createElement('dialog')
-    dialog.open = true
     this.shadowRoot!.appendChild(dialog)
+    dialog.showModal()
+
 
     dialog.appendChild(this.form)
     this.addListenerToForm()
@@ -97,6 +103,11 @@ export default class CreateDialog extends HTMLElement {
       container.appendChild(emojiContainer)
     })
   }
+
+  // protected isEmojiSelected(emoji: string) {
+  //   // return !!this.userSelectEmoji && this.userSelectEmoji === emoji
+  //   return this.motus!.value === parseInt(emoji)
+  // }
 
   addListenerToForm() {
     this.form.addEventListener('submit', async (event) => {
