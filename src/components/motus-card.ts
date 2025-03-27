@@ -70,6 +70,11 @@ export default class MotusCard extends HTMLElement {
     `
     this.shadowRoot?.appendChild(style)
   }
+
+  createDeleteBtn() {
+    const btn = document.createElement('button')
+    btn.innerText = 'delete'
+  }
 }
 
 customElements.define('motus-card', MotusCard)
